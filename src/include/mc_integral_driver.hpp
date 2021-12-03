@@ -1,0 +1,1 @@
+double mc_integral_timer(gsl_rng* h);
