@@ -9,7 +9,8 @@ While industry standard benchmarks like HPLinpack exist, which is used for makin
 In specific simulations and workloads which are characterisitic to physics research, not only we need to solve linear equations systems (which can be parallelized easily), but other not-so-parallelizable things like solving ODEs, PDEs and so on. We aim to tackle that problem with this suite - not only we use solving linear equations as a tool but also things like performing integrals, doing Monte-Carlo integrals and solving ODEs. We aim to add more features and tests in the future along with distributed-memory and GPU support.
 
 ## Compiling and Running
-- Make sure you have OpenMP and GNU Scientific Library installed.
+- Make sure you have OpenMP and GNU Scientific Library installed
+-- Use the commands "sudo apt install libomp-dev" and "sudo apt install libgsl-dev" for Debain based distributions.
 - Clone the repository into a folder.
 - In the folder HPPWB, run "make" which should generate an executable "main_driver.run"
 - Run the benchmark using "./main_driver.run N" where N is an integer denoting the number of run-passes.
