@@ -21,7 +21,7 @@ double matrix_mul_timer(gsl_rng* h)
 {
     double start_time=omp_get_wtime();
 
-    int N=1000;
+    int N=10000;
     double** C=new double*[N];
     double** A=new double*[N];
     double** B=new double*[N];
@@ -33,7 +33,7 @@ double matrix_mul_timer(gsl_rng* h)
         C[i]=new double[N];
     }
 
-    #pramga omp parallel for
+    #pragma omp parallel for collapse(2)
     for(int i=0;i<N;i++)
     {
         for(int j=0;j<N;j++)
@@ -54,6 +54,33 @@ double matrix_mul_timer(gsl_rng* h)
         }
     }
 
+    for(int i=0;i<N;i++)
+    {
+        delete[] A[i];
+        delete[] B[i];
+        delete[] C[i];
+    }
+    delete[] A;
+    delete[] B;
+    delete[] C;
+
     double end_time=omp_get_wtime();
     return (end_time-start_time);
 }
+
+//Testing Code
+// int main(int argc, char* argv[])
+// {
+//     double t=0;
+//     gsl_rng* h=gsl_rng_alloc(gsl_rng_taus);
+//     gsl_rng_set(h,time(NULL));
+//     srand48(time(NULL));
+
+//     int NUM=10;
+
+//     for(int COUNT=1;COUNT<=NUM;COUNT++)
+//         t=t+matrix_mul_timer(h);
+
+//     printf("Avg=%lf\n",t/NUM);
+//     return 0;
+// }
