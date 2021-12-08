@@ -16,7 +16,7 @@ In specific simulations and workloads which are characterisitic to physics resea
 - Run the benchmark using "./main_driver.run N" where N is an integer denoting the number of run-passes.
 
 ## Next Features
-1. Adding a NxN matrix multiplication benchmark where N=1000
+1. Adding a FLOPS calculation using SGEMM BLAS function.
 2. Adding support for using config files to change the benchmark parameters rather than re-compiling the source.
 ## Author and Contact
 Dhrubajyoti Biswas
