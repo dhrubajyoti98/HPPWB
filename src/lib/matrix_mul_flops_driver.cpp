@@ -3,8 +3,8 @@ HPPWB High Performance Physics Workstation Benchmark v0.1.0
 author: dhrubajyoti biswas, email: dhrubajyoti98@gmail.com
 date: Dec 6 , 2021
 
-This file contains the code for the matrix-multiplication benchmark.
-
+This file contains the code for SGEMM benchmark
+for calculating the FLOPS.
 */
 
 #include<cstdio>
