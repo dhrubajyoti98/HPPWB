@@ -1,1 +1,1 @@
-double matrix_mul_flops_timer(gsl_rng*);
+double matrix_mul_flops_timer(gsl_rng* h);
