@@ -19,8 +19,8 @@ for calculating the FLOPS.
 
 double matrix_mul_flops_timer(gsl_rng* h)
 {
-    long long int N=100;
-    int niter=10;
+    long long int N=1000;
+    int niter=100;
 
     double alpha=gsl_rng_uniform(h);
     double beta=gsl_rng_uniform(h);
@@ -46,17 +46,20 @@ double matrix_mul_flops_timer(gsl_rng* h)
         {
             for(int j=0;j<N;j++)
             {
-                #pragma omp parallel for
-                for(int k=0;k<N;k++)
-                    D[i][j]=D[i][j]+(alpha*A[i][k]*B[k][j]);
+                double val=0;
 
-                D[i][j]=fma(beta,C[i][j],D[i][j]);
+                #pragma omp parallel for reduction(+:val)
+                for(int k=0;k<N;k++)
+                    val=val+(A[i][k]*B[k][j]);
+
+                D[i][j]=alpha*val+beta*C[i][j];
             }
         }   
     }
     double end_time=omp_get_wtime();
+
     double flops64=(2*N*N*(N+1)*niter)/(end_time-start_time);
-    return flops64/(pow(10,9));
+    return flops64;
 }
 
 //Testing Code
@@ -66,6 +69,6 @@ int main(int argc, char* argv[])
     gsl_rng_set(h,time(NULL));
     srand48(time(NULL));
 
-    printf("Avg FLOPS64=%lf GFLOPS\n",matrix_mul_flops_timer(h));
+    printf("FLOPS64=%lf GFLOPS\n",matrix_mul_flops_timer(h)/pow(10,9));
     return 0;
 }
