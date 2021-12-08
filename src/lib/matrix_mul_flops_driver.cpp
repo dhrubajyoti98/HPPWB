@@ -19,19 +19,18 @@ for calculating the FLOPS.
 
 double matrix_mul_flops_timer(gsl_rng* h)
 {
-    double N=500;
+    long long int N=100;
     int niter=10;
-    int size=(int)N;
 
     double alpha=gsl_rng_uniform(h);
     double beta=gsl_rng_uniform(h);
 
-    double A[size][size], B[size][size], C[size][size], D[size][size];
+    double A[N][N], B[N][N], C[N][N], D[N][N];
     
     #pragma omp parallel for collapse(2)
-    for(int i=0;i<size;i++)
+    for(int i=0;i<N;i++)
     {
-        for(int j=0;j<size;j++)
+        for(int j=0;j<N;j++)
         {
             A[i][j]=gsl_rng_uniform(h);
             B[i][j]=gsl_rng_uniform(h);
@@ -42,22 +41,21 @@ double matrix_mul_flops_timer(gsl_rng* h)
     double start_time=omp_get_wtime();
     for(int n=1;n<=niter;n++)
     {
-        printf("Iter%d\n",n);
         #pragma omp parallel for collapse(2) schedule(static)
-        for(int i=0;i<size;i++)
+        for(int i=0;i<N;i++)
         {
-            for(int j=0;j<size;j++)
+            for(int j=0;j<N;j++)
             {
-                D[i][j]=beta*C[i][j];
-                #pragma omp simd
-                for(int k=0;k<size;k++)
-                    D[i][j]=D[i][j]+alpha*A[i][k]*B[k][j];
+                #pragma omp parallel for
+                for(int k=0;k<N;k++)
+                    D[i][j]=D[i][j]+(alpha*A[i][k]*B[k][j]);
+
+                D[i][j]=fma(beta,C[i][j],D[i][j]);
             }
         }   
     }
     double end_time=omp_get_wtime();
-
-    double flops64=(int)(2*N*N*(N+1)*niter)/(end_time-start_time);
+    double flops64=(2*N*N*(N+1)*niter)/(end_time-start_time);
     return flops64/(pow(10,9));
 }
 
