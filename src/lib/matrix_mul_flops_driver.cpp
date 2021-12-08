@@ -19,7 +19,7 @@ for calculating the FLOPS.
 
 double matrix_mul_flops_timer(gsl_rng* h)
 {
-    double N=100;
+    double N=500;
     int niter=10;
     int size=(int)N;
 
@@ -43,7 +43,7 @@ double matrix_mul_flops_timer(gsl_rng* h)
     for(int n=1;n<=niter;n++)
     {
         printf("Iter%d\n",n);
-        #pragma omp parallel for collapse(2)
+        #pragma omp parallel for collapse(2) schedule(static)
         for(int i=0;i<size;i++)
         {
             for(int j=0;j<size;j++)
