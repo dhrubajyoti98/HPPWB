@@ -17,70 +17,57 @@ for calculating the FLOPS.
 #include<gsl/gsl_rng.h>
 #include<gsl/gsl_randist.h>
 
-double matrix_mul_timer(gsl_rng* h)
+double matrix_mul_flops_timer(gsl_rng* h)
 {
-    double start_time=omp_get_wtime();
+    double N=100;
+    int niter=10;
+    int size=(int)N;
 
-    int N=10000;
-    double** C=new double*[N];
-    double** A=new double*[N];
-    double** B=new double*[N];
+    double alpha=gsl_rng_uniform(h);
+    double beta=gsl_rng_uniform(h);
 
-    for(int i=0;i<N;i++)
-    {
-        A[i]=new double[N];
-        B[i]=new double[N];
-        C[i]=new double[N];
-    }
-
+    double A[size][size], B[size][size], C[size][size], D[size][size];
+    
     #pragma omp parallel for collapse(2)
-    for(int i=0;i<N;i++)
+    for(int i=0;i<size;i++)
     {
-        for(int j=0;j<N;j++)
+        for(int j=0;j<size;j++)
         {
             A[i][j]=gsl_rng_uniform(h);
             B[i][j]=gsl_rng_uniform(h);
-            C[i][j]=0;
+            C[i][j]=gsl_rng_uniform(h);
         }
     }
 
-    #pragma omp parallel for collapse(3)
-    for(int i=0;i<N;i++)
+    double start_time=omp_get_wtime();
+    for(int n=1;n<=niter;n++)
     {
-        for(int j=0;j<N;j++)
+        printf("Iter%d\n",n);
+        #pragma omp parallel for collapse(2)
+        for(int i=0;i<size;i++)
         {
-            for(int k=0;k<N;k++)
-                C[i][j]=C[i][j]+A[i][k]*B[k][j];
-        }
+            for(int j=0;j<size;j++)
+            {
+                D[i][j]=beta*C[i][j];
+                #pragma omp simd
+                for(int k=0;k<size;k++)
+                    D[i][j]=D[i][j]+alpha*A[i][k]*B[k][j];
+            }
+        }   
     }
-
-    for(int i=0;i<N;i++)
-    {
-        delete[] A[i];
-        delete[] B[i];
-        delete[] C[i];
-    }
-    delete[] A;
-    delete[] B;
-    delete[] C;
-
     double end_time=omp_get_wtime();
-    return (end_time-start_time);
+
+    double flops64=(int)(2*N*N*(N+1)*niter)/(end_time-start_time);
+    return flops64/(pow(10,9));
 }
 
 //Testing Code
-// int main(int argc, char* argv[])
-// {
-//     double t=0;
-//     gsl_rng* h=gsl_rng_alloc(gsl_rng_taus);
-//     gsl_rng_set(h,time(NULL));
-//     srand48(time(NULL));
+int main(int argc, char* argv[])
+{
+    gsl_rng* h=gsl_rng_alloc(gsl_rng_taus);
+    gsl_rng_set(h,time(NULL));
+    srand48(time(NULL));
 
-//     int NUM=10;
-
-//     for(int COUNT=1;COUNT<=NUM;COUNT++)
-//         t=t+matrix_mul_timer(h);
-
-//     printf("Avg=%lf\n",t/NUM);
-//     return 0;
-// }
+    printf("Avg FLOPS64=%lf GFLOPS\n",matrix_mul_flops_timer(h));
+    return 0;
+}
