@@ -26,14 +26,14 @@ double direct_integral_timer()
     double actual_VALUE=M_PI;
     double computed_VALUE=0;
 
-    int COUNT=100000;
+    int COUNT=500000;
     double h=1.0/COUNT;
 
     #pragma omp parallel for reduction(+:computed_VALUE)
     for(int n=0;n<COUNT;n++)
         computed_VALUE=computed_VALUE+0.5*h*(g(n*h)+g((n+1)*h));
 
-    //printf("%lf\n",computed_VALUE);
+    printf("%0.5lf\n",computed_VALUE);
     double end_time=omp_get_wtime();
     
     return (end_time-start_time);
