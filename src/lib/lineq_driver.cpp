@@ -87,8 +87,8 @@ double lineq_timer(gsl_rng* h)
 		ITER_COUNT++;
 	}
 
-	for(int i=0;i<DIM;i++)
-		printf("%lf\n",x[i]);
+	// for(int i=0;i<DIM;i++)
+	// 	printf("%lf\n",x[i]);
 	
 	for(int i=0;i<DIM;i++)
 		delete[] A[i];
