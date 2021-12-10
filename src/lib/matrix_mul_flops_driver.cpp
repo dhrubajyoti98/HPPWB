@@ -48,7 +48,7 @@ double matrix_mul_flops_timer(gsl_rng* h)
             {
                 double val=0;
 
-                #pragma omp parallel for reduction(+:val)
+                #pragma omp parallel for reduction(+:val) schedule(static)
                 for(int k=0;k<N;k++)
                     val=val+(A[i][k]*B[k][j]);
 
@@ -63,12 +63,12 @@ double matrix_mul_flops_timer(gsl_rng* h)
 }
 
 //Testing Code
-int main(int argc, char* argv[])
-{
-    gsl_rng* h=gsl_rng_alloc(gsl_rng_taus);
-    gsl_rng_set(h,time(NULL));
-    srand48(time(NULL));
+// int main(int argc, char* argv[])
+// {
+//     gsl_rng* h=gsl_rng_alloc(gsl_rng_taus);
+//     gsl_rng_set(h,time(NULL));
+//     srand48(time(NULL));
 
-    printf("FLOPS64=%lf GFLOPS\n",matrix_mul_flops_timer(h)/pow(10,9));
-    return 0;
-}
+//     printf("FLOPS64=%lf GFLOPS\n",matrix_mul_flops_timer(h)/pow(10,9));
+//     return 0;
+// }
