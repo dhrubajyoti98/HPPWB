@@ -32,12 +32,13 @@ git clone git@github.com:dhrubajyoti98/HPPWB.git
 cd HPPWB
 make
 ```
+
 &rarr; The compiler optimizations being passed to g++ are "-Ofast" and "-march=native".
 
-- Run the benchmark using "./main_driver.run N" where N is an integer denoting the number of run-passes.
+- Run the benchmark using
   
 ```console
-./main_driver <number of run-passes>
+./hppwb_bench.run <number of run-passes>
 ```
 
 ## Next Features
