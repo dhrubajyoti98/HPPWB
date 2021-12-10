@@ -35,6 +35,12 @@ make
 
 &rarr; The compiler optimizations being passed to g++ are "-Ofast" and "-march=native".
 
+- Change the stack size to unlimited
+
+```console
+ulimit -s unlimited
+```
+
 - Run the benchmark using
   
 ```console

@@ -54,6 +54,8 @@ int main(int argc, char* argv[])
         printf("Solving a high-dimensional ODE using RK4.\n");
         ode_time+=ode_timer(h);
     }
+    
+    flops=flops/pow(10,6);
     printf("\n");
     printf("--------------------------Results-for-%03d-PASSES--------------------------\n",NUM_RUNS);
     printf("| DGEMM                              | %14.4lf Avg. MFLOPS        |\n",flops/NUM_RUNS);
