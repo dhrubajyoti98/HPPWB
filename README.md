@@ -23,7 +23,7 @@ sudo apt install git
 - Clone the repository into a folder.
   
 ```console
-git clone git@github.com:dhrubajyoti98/HPPWB.git
+git clone https://github.com/dhrubajyoti98/HPPWB.git
 ```
 
 - Change into the folder HPPWB and run "make" which should generate an executable ```hppwb_bench.run```.
