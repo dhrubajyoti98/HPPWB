@@ -28,12 +28,12 @@ double mc_integral_timer(gsl_rng* h)
     double start_time=omp_get_wtime();
     double computed_VALUE=0;
 
-    int AVG_LENGTH=1000;
+    int AVG_LENGTH=5000;
 
     #pragma omp parallel for reduction(+:computed_VALUE)
     for(int n=1;n<=AVG_LENGTH;n++)
     {
-        int SAMP_LENGTH=1000;
+        int SAMP_LENGTH=5000;
         double VALUE=0;
         
         for(int m=1;m<=SAMP_LENGTH;m++)
@@ -42,7 +42,7 @@ double mc_integral_timer(gsl_rng* h)
         computed_VALUE=computed_VALUE+(VALUE/AVG_LENGTH);
     }
 
-    //printf("%lf\n",computed_VALUE);
+    printf("%0.5lf\n",computed_VALUE);
     double end_time=omp_get_wtime();
     return (end_time-start_time);
 }
