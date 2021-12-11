@@ -51,8 +51,10 @@ int main(int argc, char* argv[])
         printf("Solving Linear Equations using Gauss-Seidel Method.\n");
         lineq_time+=lineq_timer(h);
 
-        printf("Solving a high-dimensional ODE using RK4.\n\n");
+        printf("Solving a high-dimensional ODE using RK4.\n");
         ode_time+=ode_timer(h);
+
+        printf("\n");
     }
     
     flops=flops/pow(10,6);
