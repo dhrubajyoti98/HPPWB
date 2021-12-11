@@ -29,8 +29,9 @@ int main(int argc, char* argv[])
     int RUN_COUNTER;
     int NUM_RUNS=(int)atof(argv[1]);
     
-    if(NUM_RUNS>999)printf("Large number of passes. Might take long depending on system resources available.\n");
-    if(NUM_RUNS<5)
+    if(NUM_RUNS>999)
+        printf("Large number of passes. Might take long depending on system resources available.\n");
+    else if(NUM_RUNS<5)
     {
         printf("Small number of passess. Use atleast 5.\n");
         exit(0);
