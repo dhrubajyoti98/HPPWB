@@ -1,3 +1,6 @@
+
+[For a PDF version of this README, run ```pandoc README.md -o README.pdf``` after cloning.]
+
 # HPPWB - High Performance Physics Workstation Benchmark
 
 HPPWB (High Performance Physics Workstation Benchmark) is an alternative suite for benchmarking workstations with specifically shared-memory architectures (for now).
@@ -8,7 +11,7 @@ While industry standard benchmarks like HPLinpack exist, which is used for makin
 
 In specific simulations and workloads which are characterisitic to physics research, we need to solve linear equations systems (which can be parallelized easily), but also other not-so-parallelizable things like solving ODEs, PDEs and so on. We aim to tackle that problem with this suite - not only are we using solving linear equations as a benchmark but also things like performing integrals using Trapezoidal rule and the Monte-Carlo estimator, solving high-dimensional ODEs and BLAS routines. We aim to add more features and tests in the future along with acclerators and distributed-memory architecture support.
 
-&rarr; **Benchmarks currently available:**
+- **Benchmarks currently available:**
 
 | Name and Description | Output | Interpretation |
 |------|--------|----------------|
