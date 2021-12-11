@@ -26,22 +26,22 @@ sudo apt install git
 git clone git@github.com:dhrubajyoti98/HPPWB.git
 ```
 
-- Change into the folder HPPWB and run "make" which should generate an executable "main_driver.run"
+- Change into the folder HPPWB and run "make" which should generate an executable ```hppwb_bench.run```.
   
 ```console
 cd HPPWB
 make
 ```
 
-&rarr; The compiler optimizations being passed to g++ are "-Ofast" and "-march=native".
+&rarr; The compiler optimizations being passed to g++ are ```-Ofast``` and ```-march=native```.
 
-- Change the stack size to unlimited
+- Change the stack size to unlimited.
 
 ```console
 ulimit -s unlimited
 ```
 
-- Run the benchmark using
+- Run the benchmark.
   
 ```console
 ./hppwb_bench.run <number of run-passes>
