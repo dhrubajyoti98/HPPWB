@@ -18,7 +18,7 @@ HPPWB (High Performance Physics Workstation Benchmark) is an alternative suite f
 
 While industry standard benchmarks like HPLinpack exist, which is used for making the TOP500 list, and is widely used across domains, such benchmarks use a fixed workload like solving a dense set of linear equations to measure the performance of a system. While that provides a nice standard, it is generally not reflective of real-life performance in variety of workloads.
 
-In specific simulations and workloads which are characterisitic to physics research, we need to solve linear equations systems (which can be parallelized easily), but also other not-so-parallelizable things like solving ODEs, PDEs and so on. We aim to tackle that problem with this suite - not only are we using solving linear equations as a benchmark but also things like performing integrals using Trapezoidal rule and the Monte-Carlo estimator, solving high-dimensional ODEs and BLAS routines. I aim to add more features and tests in the future along with acclerators and distributed-memory architecture support.
+In specific simulations and workloads which are characterisitic to physics and engineering research, not only do we need to solve linear equations systems (which can be parallelized easily), but also other not-so-parallelizable things like solving ODEs, PDEs and so on. We aim to tackle that problem with this suite - not only are we using solving linear equations as a benchmark but also things like performing integrals using Trapezoidal rule and the Monte-Carlo estimator, solving high-dimensional ODEs and BLAS routines. I aim to add more features and tests in the future along with acclerators and distributed-memory architecture support.
 
 - **Benchmarks currently available:**
 
