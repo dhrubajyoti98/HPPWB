@@ -19,8 +19,8 @@ for calculating the FLOPS.
 
 double matrix_mul_flops_timer(gsl_rng* h)
 {
-    long long int N=1000;
-    int niter=100;
+    long long int N=(int)atof(getenv("MATRIX_DIM"));
+    int niter=(int)atof(getenv("N_ITER"));
 
     double alpha=gsl_rng_uniform(h);
     double beta=gsl_rng_uniform(h);
