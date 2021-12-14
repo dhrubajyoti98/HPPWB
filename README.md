@@ -73,7 +73,11 @@ ulimit -s unlimited
 
 ## Sample Output
 
-- Intel Core i7-10700F @2.9 GHZ 8C 16T, 32 GB RAM, Ubuntu 20.04.3 LTS
+- Intel Core i9-10900K @3.7 GHz 10C 20T, 128 GB RAM, Ubuntu 20.04.3 LTS
+  
+![Sample Output1](RM_img/i9.png)
+
+- Intel Core i7-10700F @2.9 GHz 8C 16T, 32 GB RAM, Ubuntu 20.04.3 LTS
   
 ![Sample Output1](RM_img/i7.png)
 
