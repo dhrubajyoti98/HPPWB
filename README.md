@@ -71,11 +71,11 @@ ulimit -s unlimited
 source bench_parameters.config && ./hppwb_bench.run <number of run-passes>
 ```
 
-&rarr; If ```source``` does not work, use ```. bench_parameters.config && ./hppwb_bench.run```.
+&rarr; If ```source``` does not work, use ```. bench_parameters.config && ./hppwb_bench.run <number of run-passes>```.
 
 &rarr; ```<number of run-passes>``` **must** be greater than **5**.
 
-&rarr; If you want to change the benchmark parameters, edit the ```bench_parameters.config``` file - the contents of the file are self-explanatory. The default values which are set can be viewed by viewed by running ```cat bench_parameters.config```.
+&rarr; If you want to change the benchmark parameters, edit the ```bench_parameters.config``` file - the contents of the file are self-explanatory. The default values which are set can be viewed by running ```cat bench_parameters.config```.
 
 ```console
 #!/bin/bash
@@ -105,6 +105,8 @@ export COUNT=500000000
 ```
 
 &rarr; To re-run the benchmark after changing the parameter values in the ```bench_parameters.config``` file, *there is no need to recomplie the source* - you can run the benchmark again directly.
+
+&rarr; Separate benchmark parameter files can be generated and saved. All the environment variables declared in ```bench_parameters.config``` should be redefined in the corresponding file and the name of the file should be used in place of ```bench_parameters.config``` while running the benchmark.
 
 ## Sample Output
 
