@@ -32,7 +32,7 @@ double lineq_timer(gsl_rng* h)
 {
 	double start_time=omp_get_wtime();
 
-	int DIM=(int)atof(getenv("DIM"));
+	int DIM=(int)atof(getenv("LIN_DIM"));
 
 	double* x=new double[DIM];
 	double* xnew=new double[DIM];

@@ -87,7 +87,7 @@ double ode_timer(gsl_rng* h)
 {
     double start_time=omp_get_wtime();
 
-    int DIM=(int)atof(getenv("DIM")), T=(int)atof(getenv("T"));
+    int DIM=(int)atof(getenv("ODE_DIM")), T=(int)atof(getenv("ODE_TIME"));
 
     double x[DIM];
     initState(DIM,x,h);

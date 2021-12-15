@@ -63,15 +63,50 @@ make
 ulimit -s unlimited
 ```
 
-- Run the benchmark.
+- Set the benchmark parameters and run the benchmark.
   
 ```console
-./hppwb_bench.run <number of run-passes>
+source bench_parameters.config && ./hppwb_bench.run <number of run-passes>
 ```
+
+&rarr; If ```source``` does not work, use ```. bench_parameters.config && ./hppwb_bench.run```.
 
 &rarr; ```<number of run-passes>``` **must** be greater than **5**.
 
+- If you want to change the benchmark parameters, edit the ```bench_parameters.config``` file - the contents of the file are self-explanatory. The default values which are set can be viewed by viewed by running ```cat bench_parameters.config```.
+
+```console
+#!/bin/bash
+
+#Do_not_edit_this_file_unless_you_know_what_you_are_doing.
+#Changing_the_contents_of_this_file_might_change_the_output_values.
+
+#ODE_system_and_Time_of_Solution_Details
+export ODE_DIM=150
+export ODE_TIME=10000
+
+#Monte-Carlo_Integral_Details
+export AVG_LENGTH=5000
+export SAMP_LENGTH=5000
+
+#DGEMM_Matrix_Multiplication_Details
+export MATRIX_DIM=1000
+export N_ITER=100
+
+#Linear_Equation_Solution_Details_(error_limit_is_10^-5)
+export LIN_DIM=1000
+export MAX_ITER=1000000
+export ERR_TOL=5
+
+#Direct_Integral_Details
+export COUNT=500000000
+```
+
+&rarr; To re-run the benchmark after changing the parameter values in the ```bench_parameters.config``` file, there is no need to recomplie the source - You can run the benchmark again using the command shown previous point.
+
 ## Sample Output
+
+&rarr; Benchmark parameters used are the ones given in the previous section.
 
 - Intel Core i9-10900K @3.7 GHz 10C 20T, 128 GB RAM, Ubuntu 20.04.3 LTS
   
