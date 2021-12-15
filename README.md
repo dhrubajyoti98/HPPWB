@@ -16,9 +16,9 @@ HPPWB (High Performance Physics Workstation Benchmark) is an alternative suite f
 
 ## Why and How?
 
-While industry standard benchmarks like HPLinpack exist, which is used for making the TOP500 list, and is widely used across domains, such benchmarks use a fixed workload like solving a dense set of linear equations to measure the performance of a system. While that provides a nice standard, it is generally not reflective of real-life performance in variety of workloads.
+While industry standard benchmarks like HPL exist, which is used for making the TOP500 list, and is widely used across many domains, such benchmarks use a fixed workload like solving a dense set of linear equations to measure the performance of a system. While that provides a nice standard, it is generally not reflective of real-life performance in variety of workloads.
 
-In specific simulations and workloads which are characterisitic to physics and engineering research, not only do we need to solve linear equations systems (which can be parallelized easily), but also other not-so-parallelizable things like solving ODEs, PDEs and so on. We aim to tackle that problem with this suite - not only are we using solving linear equations as a benchmark but also things like performing integrals using Trapezoidal rule and the Monte-Carlo estimator, solving high-dimensional ODEs and BLAS routines. I aim to add more features and tests in the future along with acclerators and distributed-memory architecture support.
+In specific simulations and workloads which are characterisitic to physics and engineering research, not only do we need to solve linear equations systems, but also other things like solving ODEs, PDEs and so on. We aim to tackle that problem with this suite &rarr; not only are we using solving linear equations as a benchmark but also things like performing integrals using Trapezoidal rule and the Monte-Carlo estimator, solving high-dimensional ODEs and BLAS routines. I aim to add more features and tests in the future along with acclerators and distributed-memory architecture support.
 
 - **Benchmarks currently available:**
 
@@ -32,9 +32,9 @@ In specific simulations and workloads which are characterisitic to physics and e
 
 ## Compiling and Running
 
-- Install OpenMP, GNU Scientific Library and git, if not already installed.
+- **Install OpenMP, GNU Scientific Library and git, if not already installed.**
   
-&rarr; For Ubuntu and it's derivatives
+&rarr; For Ubuntu and it's derivatives, use the commands below. [These libraries are available for other distributions as well]
 
 ```console
 sudo apt install libomp-dev
@@ -42,13 +42,13 @@ sudo apt install libgsl-dev
 sudo apt install git
 ```
 
-- Clone the repository into a folder.
+- **Clone the repository into a folder.**
   
 ```console
 git clone https://github.com/dhrubajyoti98/HPPWB.git
 ```
 
-- Change into the folder HPPWB and run "make" which should generate an executable ```hppwb_bench.run```.
+- **Change into HPPWB and run "make" which should generate an executable ```hppwb_bench.run```.**
   
 ```console
 cd HPPWB
@@ -57,13 +57,15 @@ make
 
 &rarr; The compiler optimizations being passed to g++ are ```-Ofast``` and ```-march=native```.
 
-- Change the stack size to unlimited.
+- **Change the stack size to unlimited.**
 
 ```console
 ulimit -s unlimited
 ```
 
-- Set the benchmark parameters and run the benchmark.
+&rarr; Not doing this step may show a segmentation fault.
+
+- **Set the benchmark parameters and run the benchmark.**
   
 ```console
 source bench_parameters.config && ./hppwb_bench.run <number of run-passes>
@@ -73,7 +75,7 @@ source bench_parameters.config && ./hppwb_bench.run <number of run-passes>
 
 &rarr; ```<number of run-passes>``` **must** be greater than **5**.
 
-- If you want to change the benchmark parameters, edit the ```bench_parameters.config``` file - the contents of the file are self-explanatory. The default values which are set can be viewed by viewed by running ```cat bench_parameters.config```.
+&rarr; If you want to change the benchmark parameters, edit the ```bench_parameters.config``` file - the contents of the file are self-explanatory. The default values which are set can be viewed by viewed by running ```cat bench_parameters.config```.
 
 ```console
 #!/bin/bash
@@ -102,7 +104,7 @@ export ERR_TOL=5
 export COUNT=500000000
 ```
 
-&rarr; To re-run the benchmark after changing the parameter values in the ```bench_parameters.config``` file, there is no need to recomplie the source - You can run the benchmark again using the command shown previous point.
+&rarr; To re-run the benchmark after changing the parameter values in the ```bench_parameters.config``` file, *there is no need to recomplie the source* - you can run the benchmark again directly.
 
 ## Sample Output
 
@@ -120,10 +122,11 @@ export COUNT=500000000
   
 ![Sample Output2](RM_img/xeon.png)
 
-## Next Features
+## Next Update
 
-1. Adding support for using config files to change the benchmark parameters rather than re-compiling the source.
-2. Add GPU Compute Support.
+1. Add more benchmark test options.
+2. Add GPU Compute Benchmark support.
+3. Add Distributed-Memory support.
 
 ## Author and Contact
 
