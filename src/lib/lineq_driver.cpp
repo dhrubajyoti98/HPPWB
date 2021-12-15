@@ -32,7 +32,7 @@ double lineq_timer(gsl_rng* h)
 {
 	double start_time=omp_get_wtime();
 
-	int DIM=1000;
+	int DIM=(int)atof(getenv("LIN_DIM"));
 
 	double* x=new double[DIM];
 	double* xnew=new double[DIM];
@@ -60,8 +60,9 @@ double lineq_timer(gsl_rng* h)
 		A[i][i]=sum+0.5;
 	}
 
-	int ITER_COUNT=1, MAX_ITER=1000000;
-	double err=pow(10,-1), err_tol=pow(10,-5);
+	int ITER_COUNT=1, MAX_ITER=(int)atof(getenv("MAX_ITER"));
+	double err=pow(10,-1), err_tol=pow(10,-(int)atof(getenv("ERR_TOL")));
+	
 	while(ITER_COUNT<=MAX_ITER && err > err_tol)
 	{
 		//printf("IterCount=%d, Err=%lf\n",ITER_COUNT,err);
